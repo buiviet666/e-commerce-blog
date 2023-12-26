@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/media.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,10 +19,10 @@
         <div>
             <ul id="navbar">
                 <li>
-                    <a class="active" href="index.html">Home</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="product.html">Shop</a>
+                    <a class="active" href="product.html">Shop</a>
                 </li>
                 <li>
                     <a href="blog.html">Blog</a>
@@ -49,50 +49,24 @@
         </div>
     </section>
 
-    <section id="hero">
-        <h4>tra-in-offer</h4>
-        <h2>super value deals</h2>
-        <h1>on all products</h1>
-        <p>save more with coupons & up 70% off!</p>
-        <button>shop now</button>
-    </section>
-
-    <section id="feature" class="section-p1">
-        <div class="fe-box">
-            <img src="img/features/f1.png" alt="img-feature" />
-            <h6>free shipping</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f2.png" alt="img-feature" />
-            <h6>online order</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f3.png" alt="img-feature" />
-            <h6>save money</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f4.png" alt="img-feature" />
-            <h6>promotions</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f5.png" alt="img-feature" />
-            <h6>happy sell</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f6.png" alt="img-feature" />
-            <h6>f24/7 support</h6>
-        </div>
+    <section id="page-header">
+        <h2>
+            #stay home
+        </h2>
+        <p>
+            save more with coupons & up to 70% off!
+        </p>
     </section>
 
     <section id="product1" class="section-p1">
-        <h2>feature products</h2>
-        <p>summer collection new morden design</p>
+        <!-- <h2>feature products</h2>
+        <p>summer collection new morden design</p> -->
         <div class="pro-container">
             <div class="pro">
                 <img src="img/products/f1.jpg" alt="img product" />
                 <div class="des">
                     <span>adidas</span>
-                    <h5>Cartoon astronaunt T-shirts</h5>
+                    <a href="single_product.html">Cartoon astronaunt T-shirts</a>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -102,11 +76,11 @@
                     </div>
                     <h4>$78</h4>
                 </div>
-                <a href="#">
+                <a href="cart.html">
                     <i class="cart fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
-            <div class="pro">
+            <div class="pro" onclick="window.location.href='single_product.html'">
                 <img src="img/products/f2.jpg" alt="img product" />
                 <div class="des">
                     <span>adidas</span>
@@ -232,25 +206,6 @@
                     <i class="cart fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
-        </div>
-    </section>
-
-    <section id="banner" class="section-m1">
-        <h4>
-            repair services
-        </h4>
-        <h2>
-            up to <span>70% off</span> - all t-shirts & accessories
-        </h2>
-        <button class="normal">
-            explore more
-        </button>
-    </section>
-
-    <section id="product1" class="section-p1">
-        <h2>New arrivals</h2>
-        <p>summer collection new morden design</p>
-        <div class="pro-container">
             <div class="pro">
                 <img src="img/products/n1.jpg" alt="img product" />
                 <div class="des">
@@ -398,50 +353,12 @@
         </div>
     </section>
 
-    <section id="sm-banner" class="section-p1">
-        <div class="banner-box">
-            <h4>
-                crazy deals
-            </h4>
-            <h2>
-                buy 1 get 1 free
-            </h2>
-            <span>
-                the best classic dress is on sale at cara
-            </span>
-            <button class="white">
-                learn more
-            </button>
-        </div>
-        <div class="banner-box banner-box2">
-            <h4>
-                spring summer
-            </h4>
-            <h2>
-                upcoming season
-            </h2>
-            <span>
-                the best classic dress is on sale at cara
-            </span>
-            <button class="white">
-                learn more
-            </button>
-        </div>
-    </section>
-
-    <section id="banner3">
-        <div class="banner-box">
-            <h2>SEASONAL SALE</h2>
-            <h3>winter collection -50% OFF</h3>
-        </div>
-        <div class="banner-box banner-box2">
-            <h2>NEW FOOTWEAR COLLECTION</h2>
-            <h3>spring summer 2023</h3>
-        </div>
-        <div class="banner-box banner-box3">
-            <h2>T-SHIRTS</h2>
-            <h3>New trendy prints</h3>
-        </div>
+    <section id="pagination" class="section-p1">
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
     </section>
 
     <section id="newsletter" class="section-p1 section-m1">
@@ -508,8 +425,7 @@
         </div>
     </footer>
 
-    <div id="app"></div>
-    <script type="module" src="/js/main.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
