@@ -98,12 +98,19 @@ input[type=number] {
   align-items: center;
   justify-content: space-between;
   padding: 20px 80px;
-  background: #E3E6F3;
+  background: #e3f4e9;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
   z-index: 9999;
   position: sticky;
   top: 0;
   left: 0;
+}
+
+#header .logo {
+  font-size: 30px;
+  color: #188084;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 #navbar {
@@ -150,7 +157,7 @@ input[type=number] {
 
 
 #hero {
-  background-image: url("img/hero4.png");
+  background-image: url("/images/fashion.jpg");
   height: 90vh;
   width: 100%;
   background-size: cover;
@@ -171,7 +178,7 @@ input[type=number] {
 }
 
 #hero button {
-  background-image: url("img/button.png");
+  background-image: url("/images/button.png");
   background-color: transparent;
   color: #088178;
   border: 0;
@@ -180,6 +187,13 @@ input[type=number] {
   cursor: pointer;
   font-weight: 700;
   font-size: 15px;
+  position: absolute;
+  bottom: 277px;
+  transition: .2s;
+}
+
+#hero button:hover {
+  font-size: 18px;
 }
 
 
