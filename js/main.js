@@ -1,37 +1,23 @@
-// click navbar while small device
-const bar = document.getElementById("bar");
-const nav = document.getElementById("navbar");
-const closebtn = document.getElementById("close");
+import axiosClient from "./api/axiosClient";
+import postApi from "./api/postApi";
 
-if (bar) {
-    bar.addEventListener('click', () => {
-        nav.classList.add('active');
-    })
+async function main() {
+    const queryParams = {
+        q: 'keyword',
+        pageSize: 8,
+        page: 1,
+    }
+
+    try {
+        const data = await postApi.getAll(queryParams);
+        if (data) {
+            console.log(data);
+        } else {
+            console.log("Không có dữ liệu được trả về từ API.");
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-if (closebtn) {
-    closebtn.addEventListener('click', () => {
-        nav.classList.remove('active');
-    })
-}
-
-// ==========================================================
-// click small img to main img ("single product")
-let main_img = document.getElementById("main-img");
-let small_img = document.getElementsByClassName("small-img");
-
-small_img[0].onclick = function () {
-    main_img.src = small_img[0].src;
-}
-
-small_img[1].onclick = function () {
-    main_img.src = small_img[1].src;
-}
-
-small_img[2].onclick = function () {
-    main_img.src = small_img[2].src;
-}
-
-small_img[3].onclick = function () {
-    main_img.src = small_img[3].src;
-}
+main();
