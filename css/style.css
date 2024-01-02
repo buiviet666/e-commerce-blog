@@ -681,6 +681,11 @@ footer .copyright {
   padding: 150px 150px 0 150px;
 }
 
+.blog_imgpost {
+  width: 100%;
+  height: 300px;
+}
+
 #blog .blog-box {
   display: flex;
   align-items: center;
