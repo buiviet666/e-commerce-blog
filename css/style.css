@@ -12,6 +12,11 @@ html {
 
 /* Global Styles */
 
+.disabled {
+  background-color: aliceblue !important;
+  pointer-events: none;
+}
+
 h1 {
   font-size: 50px;
   line-height: 64px;

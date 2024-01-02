@@ -48,11 +48,12 @@ function createPostElement(post) {
 }
 
 function rederPostList(postList) {
-    console.log({ postList });
     if (!Array.isArray(postList) || postList.length === 0) return;
 
     const ulElement = document.getElementById('blog');
     if (!ulElement) return;
+
+    ulElement.textContent = '';
 
     postList.forEach((post, idx) => {
         const postDiv = createPostElement(post);
@@ -60,17 +61,101 @@ function rederPostList(postList) {
     })
 }
 
+function rederPagination(pagination) {
+    const divPagination = document.getElementById('pagination');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (!pagination || !divPagination) return;
+
+    const totalPages = Math.ceil(pagination / 5);
+    const getPage = urlParams.get('page');
+
+    divPagination.dataset.totalPages = totalPages;
+    divPagination.dataset.page = getPage;
+
+    if (getPage <= 1) divPagination.firstElementChild?.classList.add('disabled');
+    else divPagination.firstElementChild?.classList.remove('disabled');
+
+    if (getPage >= totalPages) divPagination.lastElementChild?.classList.add('disabled');
+    else divPagination.lastElementChild?.classList.remove('disabled');
+}
+
+async function handleFilterChange(filterName, filterValue) {
+    const url = new URL(window.location);
+    url.searchParams.set(filterName, filterValue);
+    history.pushState({}, '', url);
+
+    const data = await postApi.getAll(url.searchParams);
+    rederPagination(data.totalResults);
+    rederPostList(data.articles);
+}
+
+function handlePrevClick(e) {
+    e.preventDefault();
+    const divPagination = document.getElementById('pagination');
+    if (!divPagination) return;
+
+    const page = divPagination.dataset.page;
+    if (page <= 1) return;
+
+    handleFilterChange('page', Number.parseInt(page) - 1);
+}
+
+function handleNextClick(e) {
+    e.preventDefault();
+    const divPagination = document.getElementById('pagination');
+    if (!divPagination) return;
+
+    const page = divPagination.dataset.page;
+    const totalPages = divPagination.dataset.totalPages
+    if (page >= totalPages) return;
+
+    handleFilterChange('page', Number.parseInt(page) + 1);
+}
+
+function init() {
+    const divPagination = document.getElementById('pagination');
+    if (!divPagination) return;
+
+    const prevLink = divPagination.firstElementChild;
+    if (prevLink) {
+        prevLink.addEventListener('click', handlePrevClick);
+    }
+
+    const nextLink = divPagination.lastElementChild;
+    if (nextLink) {
+        nextLink.addEventListener('click', handleNextClick);
+    }
+}
+
+function initURL() {
+    const url = new URL(window.location);
+
+    if (!url.searchParams.get('q')) url.searchParams.set('q', 'keyword');
+    if (!url.searchParams.get('pageSize')) url.searchParams.set('pageSize', 5);
+    if (!url.searchParams.get('page')) url.searchParams.set('page', 1);
+    if (!url.searchParams.get('apiKey')) url.searchParams.set('apiKey', '779bf1a2f20e44d5910ca012800910b2');
+
+    history.pushState({}, '', url);
+}
+
 (async () => {
     try {
-        const queryParams = {
-            q: 'keyword',
-            pageSize: 5,
-            page: 1,
-        }
+        init();
+        initURL();
+
+        // const queryParams = {
+        //     q: 'keyword',
+        //     pageSize: 5,
+        //     page: 1,
+        // }
+
+        const queryParams = new URLSearchParams(window.location.search);
 
         const data = await postApi.getAll(queryParams);
 
         rederPostList(data.articles);
+        rederPagination(data.totalResults);
 
     } catch (error) {
         console.log(error);
