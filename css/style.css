@@ -606,6 +606,7 @@ footer .copyright {
   border-radius: 4px;
   color: #ffffff;
   font-weight: 600;
+  margin: 5px;
 }
 
 #pagination a i{
@@ -744,6 +745,31 @@ footer .copyright {
   z-index: -6;
 }
 
+.main_search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 70px 10px 0px 10px;
+}
+
+.tittle_search {
+  font-size: 21px;
+  background-color: antiquewhite;
+  padding: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tittle_search:hover {
+  opacity: 0.6;
+  color: #000;
+}
+
+.form-control {
+  padding: 18px;
+  width: 50%;
+}
 
 /* ================================================ */
 /* About */

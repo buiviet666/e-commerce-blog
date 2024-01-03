@@ -1,4 +1,5 @@
 
+import debounce from "lodash.debounce";
 import postApi from "./api/postApi";
 
 function createPostElement(post) {
@@ -48,7 +49,7 @@ function createPostElement(post) {
 }
 
 function rederPostList(postList) {
-    if (!Array.isArray(postList) || postList.length === 0) return;
+    if (!Array.isArray(postList)) return;
 
     const ulElement = document.getElementById('blog');
     if (!ulElement) return;
@@ -58,7 +59,7 @@ function rederPostList(postList) {
     postList.forEach((post, idx) => {
         const postDiv = createPostElement(post);
         ulElement.appendChild(postDiv);
-    })
+    });
 }
 
 function rederPagination(pagination) {
@@ -68,7 +69,7 @@ function rederPagination(pagination) {
     if (!pagination || !divPagination) return;
 
     const totalPages = Math.ceil(pagination / 5);
-    const getPage = urlParams.get('page');
+    const getPage = urlParams.get('page') || 1;
 
     divPagination.dataset.totalPages = totalPages;
     divPagination.dataset.page = getPage;
@@ -95,10 +96,11 @@ function handlePrevClick(e) {
     const divPagination = document.getElementById('pagination');
     if (!divPagination) return;
 
-    const page = divPagination.dataset.page;
+    const page = Number.parseInt(divPagination.dataset.page) || 1;
     if (page <= 1) return;
 
-    handleFilterChange('page', Number.parseInt(page) - 1);
+    handleFilterChange('page', page - 1);
+    window.location.reload();
 }
 
 function handleNextClick(e) {
@@ -106,11 +108,13 @@ function handleNextClick(e) {
     const divPagination = document.getElementById('pagination');
     if (!divPagination) return;
 
-    const page = divPagination.dataset.page;
-    const totalPages = divPagination.dataset.totalPages
+    const page = Number.parseInt(divPagination.dataset.page) || 1;
+    const totalPages = divPagination.dataset.totalPages;
+
     if (page >= totalPages) return;
 
-    handleFilterChange('page', Number.parseInt(page) + 1);
+    handleFilterChange('page', page + 1);
+    window.location.reload();
 }
 
 function init() {
@@ -128,11 +132,27 @@ function init() {
     }
 }
 
+function initSearch() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+
+    // const queryParams = new URLSearchParams(window.location.search);
+    // if (queryParams.get('q')) {
+    //     searchInput.value = queryParams.get('q');
+    // }
+
+    const debounceSearch = debounce((e) => {
+        handleFilterChange('q', e.target.value);
+    }, 500)
+
+    searchInput.addEventListener('input', debounceSearch)
+}
+
 function initURL() {
     const url = new URL(window.location);
 
     if (!url.searchParams.get('q')) url.searchParams.set('q', 'keyword');
-    if (!url.searchParams.get('pageSize')) url.searchParams.set('pageSize', 5);
+    if (!url.searchParams.get('pageSize')) url.searchParams.set('pageSize', 6);
     if (!url.searchParams.get('page')) url.searchParams.set('page', 1);
     if (!url.searchParams.get('apiKey')) url.searchParams.set('apiKey', '779bf1a2f20e44d5910ca012800910b2');
 
@@ -142,6 +162,7 @@ function initURL() {
 (async () => {
     try {
         init();
+        initSearch();
         initURL();
 
         // const queryParams = {
@@ -156,7 +177,6 @@ function initURL() {
 
         rederPostList(data.articles);
         rederPagination(data.totalResults);
-
     } catch (error) {
         console.log(error);
     }

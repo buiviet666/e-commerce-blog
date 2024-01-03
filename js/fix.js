@@ -1,19 +1,19 @@
 // click navbar while small device
-const bar = document.getElementById("bar");
-const nav = document.getElementById("navbar");
-const closebtn = document.getElementById("close");
+// const bar = document.getElementById("bar");
+// const nav = document.getElementById("navbar");
+// const closebtn = document.getElementById("close");
 
-if (bar) {
-    bar.addEventListener('click', () => {
-        nav.classList.add('active');
-    })
-}
+// if (bar) {
+//     bar.addEventListener('click', () => {
+//         nav.classList.add('active');
+//     })
+// }
 
-if (closebtn) {
-    closebtn.addEventListener('click', () => {
-        nav.classList.remove('active');
-    })
-}
+// if (closebtn) {
+//     closebtn.addEventListener('click', () => {
+//         nav.classList.remove('active');
+//     })
+// }
 
 // ==========================================================
 // click small img to main img ("single product")
