@@ -1,13 +1,13 @@
 import axios from "axios"
 
-const API_KEY = "779bf1a2f20e44d5910ca012800910b2";
+const API_KEY = window.API_KEY;
 
 const axiosClient = axios.create({
     baseURL: "https://newsapi.org/v2/",
     timeout: 6000,
     headers: {
         "Content-Type": 'application/json',
-        "Access-Control-Allow-Origin": "*",
+
     },
     params: {
         apiKey: API_KEY,
