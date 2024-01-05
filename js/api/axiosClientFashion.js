@@ -1,22 +1,20 @@
-import axios from "axios"
+import axios from "axios";
 
-const API_KEY = '779bf1a2f20e44d5910ca012800910b2';
+const rapidAPI_KEY = "7e326de06fmsh2e148619e500f91p1104b7jsn5ac2bf1b0413";
 
-const axiosClient = axios.create({
-    baseURL: "https://newsapi.org/v2/",
+const axiosClientFashion = axios.create({
+    baseURL: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products",
     timeout: 6000,
     headers: {
         "Content-Type": 'application/json',
-
     },
     params: {
-        apiKey: API_KEY,
+        rapidapiKey: rapidAPI_KEY,
     }
 })
 
-
 // Add a request interceptor
-axiosClient.interceptors.request.use(function (config) {
+axiosClientFashion.interceptors.request.use(function (config) {
     // Do something before request is sent
 
     const accessToken = localStorage.getItem('access_token')
@@ -31,7 +29,7 @@ axiosClient.interceptors.request.use(function (config) {
 });
 
 // Add a response interceptor
-axiosClient.interceptors.response.use(function (response) {
+axiosClientFashion.interceptors.response.use(function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response.data;
@@ -41,4 +39,4 @@ axiosClient.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-export default axiosClient;
+export default axiosClientFashion;
