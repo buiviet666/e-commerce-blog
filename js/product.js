@@ -154,9 +154,6 @@ function initURL() {
     if (!url.searchParams.get('rapidapi-key'))
         url.searchParams.set('rapidapi-key', '7e326de06fmsh2e148619e500f91p1104b7jsn5ac2bf1b0413');
 
-    // if (!url.searchParams.get('categories'))
-    //     url.searchParams.set('categories', 'men_all');
-
     history.pushState({}, '', url);
 }
 
@@ -182,8 +179,6 @@ function initPagination() {
 
         const queryParams = new URLSearchParams(window.location.search);
         const data = await fashionApi.getAll(queryParams);
-
-        console.log(data.pagination);
 
         renderProducts(data.results);
         rederPagination(data.pagination);

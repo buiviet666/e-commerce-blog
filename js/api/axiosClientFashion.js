@@ -1,16 +1,16 @@
 import axios from "axios";
 
-const rapidAPI_KEY = "7e326de06fmsh2e148619e500f91p1104b7jsn5ac2bf1b0413";
+// const rapidAPI_KEY = "7e326de06fmsh2e148619e500f91p1104b7jsn5ac2bf1b0413";
 
 const axiosClientFashion = axios.create({
-    baseURL: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products",
+    baseURL: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
     timeout: 6000,
     headers: {
         "Content-Type": 'application/json',
     },
-    params: {
-        rapidapiKey: rapidAPI_KEY,
-    }
+    // params: {
+    //     rapidapiKey: rapidAPI_KEY,
+    // }
 })
 
 // Add a request interceptor
