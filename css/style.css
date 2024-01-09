@@ -297,13 +297,13 @@ input[type=number] {
   font-size: 12px;
 }
 
-#product1 .pro .des a {
+#product1 .pro .des .nameP {
   padding-top: 7px;
   color: #1a1a1a;
   font-size: 14px;
   text-decoration: none;
-    display: block;
-    font-weight: 700;
+  display: block;
+  font-weight: 700;
 }
 
 #product1 .pro .des i {

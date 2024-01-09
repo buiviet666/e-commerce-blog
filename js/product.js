@@ -15,9 +15,10 @@ function createProductElement(product) {
     const span = document.createElement('span');
     span.textContent = product.brandName;
 
-    const nameProduct = document.createElement('a');
-    nameProduct.href = 'single_product.html';
+    const nameProduct = document.createElement('div');
+    nameProduct.classList.add('nameP');
     nameProduct.textContent = product.name;
+
 
     const rateProduct = document.createElement('div');
     rateProduct.classList.add('start');
@@ -53,6 +54,10 @@ function createProductElement(product) {
     cartProduct.appendChild(img);
     cartProduct.appendChild(des);
     cartProduct.appendChild(a);
+
+    des.addEventListener('click', () => {
+        window.location.assign(`/single_product.html?productcode=${product.articleCodes[0]}`);
+    });
 
     return cartProduct;
 }
@@ -182,6 +187,7 @@ function initPagination() {
 
         renderProducts(data.results);
         rederPagination(data.pagination);
+        console.log(data.results);
     } catch (error) {
         console.log(error);
     }
