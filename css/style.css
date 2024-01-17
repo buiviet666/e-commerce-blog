@@ -192,8 +192,8 @@ input[type=number] {
   cursor: pointer;
   font-weight: 700;
   font-size: 15px;
-  position: absolute;
-  bottom: 277px;
+  /* position: absolute;
+  bottom: 277px; */
   transition: .2s;
 }
 
