@@ -1,19 +1,6 @@
 import fashionApi from "./api/fashionApi";
 
-// function renderProduct(productsList) {
-
-//     const mainImg = document.getElementById('main-img');
-//     mainImg.src = productsList.articlesList[0].galleryDetails[0].baseUrl;
-
-//     const smallImg = document.getElementById('smallImg');
-
-//     for (let i = 0; i < productsList.articlesList[0].galleryDetails.length; i++) {
-//         smallImg.children[i].firstElementChild.src = productsList.articlesList[0].galleryDetails[i].baseUrl;
-//     }
-// }
-
 function renderProduct(productsList) {
-
     const productDetails = document.getElementById('prodetails');
     if (!productDetails) return;
 
@@ -22,105 +9,109 @@ function renderProduct(productsList) {
     const containerImg = document.createElement('div');
     containerImg.classList.add('single-pro-image');
 
-
-    const img = document.createElement('img');
-    img.src = productsList.articlesList[0].galleryDetails[0].baseUrl;
-    img.alt = 'img product';
-    img.style.width = '100%';
-
-
-    const smallImg = document.createElement('div');
-    smallImg.classList.add('small-img-group');
-
-    for (let i = 0; i < productsList.articlesList[0].galleryDetails.length; i++) {
-        const childImgS = document.createElement('div');
-        childImgS.classList.add('small-img-col');
-
-        const imgShow = document.createElement('img');
-        imgShow.src = productsList.articlesList[0].galleryDetails[i].baseUrl;
-        imgShow.style.width = '100%';
-        imgShow.classList.add('small-img');
-
-        childImgS.appendChild(imgShow);
-
-        smallImg.appendChild(childImgS);
-    }
-
-
-    const containerDetails = document.createElement('div');
-    containerDetails.classList.add('single-pro-details');
-
-    const bread = document.createElement('h6');
-    bread.textContent = 'Shop/ ' + productsList.assortmentTypeKey;
-
-    const nameProduct = document.createElement('h4');
-    nameProduct.textContent = productsList.name;
-
-    const priceProduct = document.createElement('h2');
-    priceProduct.textContent = productsList.whitePrice.price + ' $';
-
-    const size = document.createElement('select');
-    for (let i = 0; i < productsList.measurements.length; i++) {
-        const optionSize = document.createElement('option');
-        optionSize.textContent = productsList.measurements[i];
-
-        size.appendChild(optionSize);
-    }
-
-    const inputQuantity = document.createElement('input');
-    inputQuantity.type = 'number';
-    inputQuantity.value = 1;
-
-    const addCart = document.createElement('button');
-    addCart.classList.add('normal');
-    addCart.textContent = 'Add to cart';
-
-    const backShop = document.createElement('button');
-    backShop.classList.add('normal');
-    backShop.textContent = 'Back to shop';
-
-    const titleDes = document.createElement('h4');
-    titleDes.textContent = 'Product details';
-
-    const des = document.createElement('span');
-    des.textContent = productsList.description;
-
-    containerDetails.appendChild(bread);
-    containerDetails.appendChild(nameProduct);
-    containerDetails.appendChild(priceProduct);
-    containerDetails.appendChild(size);
-    containerDetails.appendChild(inputQuantity);
-    containerDetails.appendChild(addCart);
-    containerDetails.appendChild(backShop);
-    containerDetails.appendChild(titleDes);
-    containerDetails.appendChild(des);
-
+    const img = createImage(productsList.articlesList[0].galleryDetails[0].baseUrl);
+    const smallImg = createSmallImageGroup(productsList.articlesList[0].galleryDetails);
 
     containerImg.appendChild(img);
     containerImg.appendChild(smallImg);
 
+    const containerDetails = document.createElement('div');
+    containerDetails.classList.add('single-pro-details');
 
-    productDetails.appendChild(containerImg);
-    productDetails.appendChild(containerDetails);
+    const bread = createHeader('h6', 'Shop/ ' + productsList.assortmentTypeKey);
+    const nameProduct = createHeader('h4', productsList.name);
+    const priceProduct = createHeader('h2', productsList.whitePrice.price + ' $');
 
-    // const mainImg = document.getElementById('main-img');
-    // const smallImg = document.getElementById('smallImg');
+    const size = createSelect(productsList.measurements);
 
-    // if (productsList && productsList.articlesList && productsList.articlesList.length > 0) {
-    //     const galleryDetails = productsList.articlesList[0].galleryDetails;
+    const inputQuantity = createInput('number', 1);
 
-    //     if (galleryDetails && galleryDetails.length > 0) {
-    //         mainImg.src = galleryDetails[0].baseUrl;
-    //     }
+    const addCart = createButton('button', 'normal', 'Add to cart', null);
+    const backShop = createButton('button', 'normal', 'Back to shop', null);
 
-    //     for (let i = 0; i < smallImg.children.length && i < galleryDetails.length; i++) {
-    //         const smallImgChild = smallImg.children[i].firstElementChild;
-    //         if (smallImgChild) {
-    //             smallImgChild.src = galleryDetails[i].baseUrl;
-    //         }
-    //     }
-    // }
+    const titleDes = createHeader('h4', 'Product details');
+    const des = createSpan(productsList.description);
+
+    containerDetails.append(
+        bread, nameProduct, priceProduct, size, inputQuantity,
+        addCart, backShop, titleDes, des
+    );
+
+    productDetails.append(containerImg, containerDetails);
 }
+
+function createImage(src) {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'img product';
+    img.style.width = '100%';
+    return img;
+}
+
+function createSmallImageGroup(images) {
+    const smallImg = document.createElement('div');
+    smallImg.classList.add('small-img-group');
+
+    images.forEach(imageDetails => {
+        const childImgS = document.createElement('div');
+        childImgS.classList.add('small-img-col');
+
+        const imgShow = createImage(imageDetails.baseUrl);
+        imgShow.classList.add('small-img');
+
+        childImgS.appendChild(imgShow);
+        smallImg.appendChild(childImgS);
+    });
+
+    return smallImg;
+}
+
+function createHeader(tag, text) {
+    const header = document.createElement(tag);
+    header.textContent = text;
+    return header;
+}
+
+function createSelect(options) {
+    const select = document.createElement('select');
+
+    if (options && options.length > 0) {
+        options.forEach(option => {
+            const optionSize = document.createElement('option');
+            optionSize.textContent = option;
+            select.appendChild(optionSize);
+        });
+    } else {
+        // Handle the case when 'measurements' is undefined or empty
+        const defaultOption = document.createElement('option');
+        defaultOption.textContent = 'No size available';
+        select.appendChild(defaultOption);
+    }
+
+    return select;
+}
+
+function createInput(type, value) {
+    const input = document.createElement('input');
+    input.type = type;
+    input.value = value;
+    return input;
+}
+
+function createButton(type, className, text, onClick) {
+    const button = document.createElement(type);
+    button.classList.add(className);
+    button.textContent = text;
+    if (onClick) button.addEventListener('click', onClick);
+    return button;
+}
+
+function createSpan(text) {
+    const span = document.createElement('span');
+    span.textContent = text;
+    return span;
+}
+
 
 
 function initURL() {
