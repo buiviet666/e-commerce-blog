@@ -99,7 +99,7 @@ function initURL() {
         url.searchParams.set('categories', 'home_newarrivals_all');
 
     if (!url.searchParams.get('rapidapi-key'))
-        url.searchParams.set('rapidapi-key', '7e326de06fmsh2e148619e500f91p1104b7jsn5ac2bf1b0413');
+        url.searchParams.set('rapidapi-key', 'bb0633e143msh54a54cb016e13a1p18cdd7jsn9c91c23fc0a8');
 
     history.pushState({}, '', url);
 }
